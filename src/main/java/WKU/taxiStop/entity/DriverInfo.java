@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 @Entity
 @Getter
-public class driverInfo {
+public class DriverInfo {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long did;
@@ -24,7 +24,7 @@ public class driverInfo {
 
     private String driverPw;
 
-    public driverInfo(){
+    public DriverInfo(){
 
     }
 
@@ -61,12 +61,12 @@ public class driverInfo {
             return this;
         }
 
-        public driverInfo build(){
-            return new driverInfo(this);
+        public DriverInfo build(){
+            return new DriverInfo(this);
         }
     }
 
-    public driverInfo(Builder builder){
+    public DriverInfo(Builder builder){
         this.driverName = builder.driverName;
         this.carNumber = builder.carNumber;
         this.dPhoneNumber = builder.dPhoneNumber;
