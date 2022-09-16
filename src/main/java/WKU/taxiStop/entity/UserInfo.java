@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 @Entity
 @Getter
-public class userInfo {
+public class UserInfo {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long uid;
@@ -20,6 +20,9 @@ public class userInfo {
 
     private String userName;
 
+    public UserInfo(){
+
+    }
     public static class Builder{
         private String cardPw;
         private String uPhoneNumber;
@@ -40,12 +43,12 @@ public class userInfo {
             return this;
         }
 
-        public userInfo build(){
-            return new userInfo(this);
+        public UserInfo build(){
+            return new UserInfo(this);
         }
     }
 
-    public userInfo(Builder builder){
+    public UserInfo(Builder builder){
         this.cardPw = builder.cardPw;
         this.uPhoneNumber = builder.uPhoneNumber;
         this. userName = builder.userName;

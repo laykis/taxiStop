@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 @Entity
 @Getter
-public class log {
+public class Log {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long lid;
@@ -32,6 +32,9 @@ public class log {
 
     private String yArrival;
 
+    public Log(){
+
+    }
     public static class Builder{
 
         private String userName;
@@ -89,12 +92,12 @@ public class log {
             return this;
         }
 
-        public log build(){
-            return new log(this);
+        public Log build(){
+            return new Log(this);
         }
     }
 
-    public log(Builder builder){
+    public Log(Builder builder){
         this.userName = builder.userName;
         this.driverName = builder.driverName;
         this.dPhoneNumber = builder.dPhoneNumber;
