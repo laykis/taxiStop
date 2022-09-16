@@ -1,4 +1,13 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url:
+    url: jdbc:mysql://localhost:3306/taxiStop
+    username: root
+    password: lalorsh6471!
+
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+    show-sql: true
