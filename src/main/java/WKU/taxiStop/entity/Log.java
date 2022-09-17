@@ -24,13 +24,9 @@ public class Log {
 
     private String endDate;
 
-    private String xDeparture;
+    private String boardingLocation;
 
-    private String yDeparture;
 
-    private String xArrival;
-
-    private String yArrival;
 
     public Log(){
 
@@ -42,10 +38,8 @@ public class Log {
         private String dPhoneNumber;
         private String carNumber;
         private String endDate;
-        private String xDeparture;
-        private String yDeparture;
-        private String xArrival;
-        private String yArrival;
+        private String boardingLocation;
+
 
         public Builder userName(String userName){
             this.userName = userName;
@@ -72,25 +66,11 @@ public class Log {
             return this;
         }
 
-        public Builder xDeparture(String xDeparture){
-            this.xDeparture = xDeparture;
+        public Builder boardingLocation(String boardingLocation){
+            this.boardingLocation = boardingLocation;
             return this;
         }
 
-        public Builder yDeparture(String yDeparture){
-            this.yDeparture = yDeparture;
-            return this;
-        }
-
-        public Builder xArrival(String xArrival){
-            this.xArrival = xArrival;
-            return this;
-        }
-
-        public Builder yArrival(String yArrival){
-            this.yArrival = yArrival;
-            return this;
-        }
 
         public Log build(){
             return new Log(this);
@@ -103,10 +83,8 @@ public class Log {
         this.dPhoneNumber = builder.dPhoneNumber;
         this.carNumber = builder.carNumber;
         this.endDate = builder.endDate;
-        this.xDeparture = builder.xDeparture;
-        this.yDeparture = builder.yDeparture;
-        this.xArrival = builder.xArrival;
-        this.yArrival = builder.yArrival;
+        this.boardingLocation = builder.boardingLocation;
+
     }
 
 }
