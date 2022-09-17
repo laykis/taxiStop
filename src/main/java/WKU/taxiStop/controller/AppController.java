@@ -32,7 +32,15 @@ public class AppController {
     private final LogRepository logRepository;
 
 
-
+    /**
+     * 로그인 시 호출
+     * address : httpL//192.168.193.150:8080/DriverLogin
+     * driverId : 택시 기사 아이디
+     * driverPw: 택시 기사 비밀번호
+     *
+     * 로그인 성공 시 "login success" 반환
+     * 로그인 실패 시 "fail" 반환
+     */
     @PostMapping("/DriverLogin")
     public String login(String driverId, String driverPw){
 
@@ -50,6 +58,8 @@ public class AppController {
 
     }
 
+
+
     @PostMapping("/DriverSignUp")
     public String signUp(DriverDTO driverDTO){
 
@@ -66,13 +76,17 @@ public class AppController {
             return "fail";
         }
 
-        return "sign up sucsess";
+        return "sucsess";
 
     }
 
-    @PostMapping("/Accept")
-    public String acceptCall(String token, Long did){
 
+
+    @PostMapping("/Accept")
+    public String acceptCall(String token, String driverId){
+
+
+        DriverInfo dri = driverInfoRepository.findDriverInfoByDriverId(driverId);
 
         DispatchStatusDTO dis = StaticStuff.dispatchStatusDTOList.stream()
                 .filter(dispatchStatusDTO -> dispatchStatusDTO.getToken().equals(token))
@@ -83,10 +97,14 @@ public class AppController {
 
             dis.setCallStatus("1");
 
-            return "배차 완료됬습니다.";
+            dis.setDriverName(dri.getDriverName());
+            dis.setCarNumber(dri.getCarNumber());
+            dis.setDriverPhoneNumber(dri.getDriverPhoneNumber());
+
+            return "success";
         }
 
-        return "이미 배차된 요청입니다.";
+        return "fail";
 
 
     }
@@ -94,7 +112,7 @@ public class AppController {
 
 
     @PostMapping("/BoardingComplete")
-    public void boarding(String token, Long did){
+    public void boarding(String token, String driverId){
 
         DispatchStatusDTO dis = StaticStuff.dispatchStatusDTOList.stream()
                 .filter(dispatchStatusDTO -> dispatchStatusDTO.getToken().equals(token))
@@ -130,7 +148,6 @@ public class AppController {
         logRepository.save(log);
 
     }
-
 
     @PostMapping("/NearRequest")
     public List<DispatchStatusDTO> getNearRequest(Double latitude, Double longitude, Double distance){
