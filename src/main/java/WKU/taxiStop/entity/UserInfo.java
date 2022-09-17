@@ -1,6 +1,7 @@
 package WKU.taxiStop.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,10 +10,11 @@ import javax.persistence.Id;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class UserInfo {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long uid;
+    @Id
+    private String token;
 
     private String cardPw;
 
@@ -20,9 +22,13 @@ public class UserInfo {
 
     private String userName;
 
-    public UserInfo(){
+
+    public void settingToken(String token){
+
+        this.token = token;
 
     }
+
     public static class Builder{
         private String cardPw;
         private String uPhoneNumber;

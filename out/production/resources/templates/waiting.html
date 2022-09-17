@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TaxiStop</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <style>
+            .loader {
+                border: 12px solid #f3f3f3; /* Light grey */
+                border-top: 12px solid #82ccfd; /* Blue */
+                border-radius: 50%;
+                width: 120px;
+                height: 120px;
+                animation: spin 1s linear infinite;
+            }
+
+            .complete {
+                border: 12px solid #82ccfd; /* Light grey */
+                border-radius: 50%;
+                width: 120px;
+                height: 120px;
+            }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        </style>
+        <script type="text/javascript"> 
+            
+        </script>
+    </head>
+
+    <body>
+        <div th:if="${driverName == null}" class="container">
+            <div class="row justify-content-md-center mb-3">
+                <div class="mt-5 loader"></div>
+            </div>
+            <p class="card-text h6 text-center mt-5">
+                배차 진행 중입니다.
+            </p>
+            <p class="card-text h6 text-center">
+                창을 닫아도 배차는 진행됩니다.
+            </p>
+        </div>
+        <div th:if="${driverName != null}" class="container">
+            <div class="row justify-content-md-center mb-3">
+                <div class="mt-5 complete"></div>
+            </div>
+            <p class="card-text h6 text-center mt-5">
+                배차가 완료되었습니다!
+            </p>
+            <p th:text="'차량번호 : ' + ${carNumber}" class="card-text h6 text-center">
+                차량번호 : 00가 0000
+            </p>
+            <p th:text="${driverName} + ' 기사님'" class="card-text h6 text-center">
+                홍길동 기사님
+            </p>
+            <p th:text="${dPhoneNumber}" class="card-text h6 text-center">
+                010-1234-5678
+            </p>
+        </div>
+    </body>
+</html>

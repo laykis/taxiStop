@@ -1,15 +1,11 @@
 package WKU.taxiStop;
 
-import WKU.taxiStop.DTO.AcceptDTO;
-import WKU.taxiStop.DTO.UserInfoDTO;
+import WKU.taxiStop.DTO.DispatchStatusDTO;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class StaticStuff {
 
-    public static List<UserInfoDTO> callList = new ArrayList();
-
-    public static HashMap<String, AcceptDTO> acceptList = new HashMap<>();
+    public static List<DispatchStatusDTO> dispatchStatusDTOList = new ArrayList<>();
 }
