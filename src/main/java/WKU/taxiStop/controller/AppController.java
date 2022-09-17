@@ -1,6 +1,8 @@
 package WKU.taxiStop.controller;
 
+import WKU.taxiStop.DTO.DispatchStatusDTO;
 import WKU.taxiStop.DTO.DriverDTO;
+import WKU.taxiStop.StaticStuff;
 import WKU.taxiStop.entity.DriverInfo;
 import WKU.taxiStop.repository.DriverInfoRepository;
 import WKU.taxiStop.repository.UserInfoRepository;
@@ -9,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -57,5 +62,13 @@ public class AppController {
 
     }
 
-
+    @GetMapping("/NearRequest")
+    public List<DispatchStatusDTO> getNearRequest(double latitude, double longitude, double distance){
+        return StaticStuff.dispatchStatusDTOList.stream()
+                .filter(dto -> {
+                    double x = (Math.cos(latitude) * 6400 * 2 * 3.14 / 360) * Math.abs(longitude - Double.parseDouble(dto.getLongitude()));
+                    double y = 111 * Math.abs(latitude - Double.parseDouble(dto.getLatitude()));
+                    return Math.sqrt(Math.pow(x, 2) + Math.pow(y,2)) < distance;
+                }).collect(Collectors.toList());
+    }
 }
