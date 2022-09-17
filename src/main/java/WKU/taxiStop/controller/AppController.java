@@ -126,7 +126,7 @@ public class AppController {
                 .longitude(dis.getLongitude())
                 .endDate(formatedNow)
                 .build();
-                                        .
+
         logRepository.save(log);
 
     }
