@@ -12,7 +12,7 @@ public class DriverDTO {
 
     private String driverName;
     private String carNumber;
-    private String dPhoneNumber;
+    private String driverPhoneNumber;
     private String driverId;
     private String driverPw;
 
@@ -22,7 +22,7 @@ public class DriverDTO {
                 .driverName(driverDTO.getDriverName())
                 .driverId(driverDTO.getDriverId())
                 .driverPw(driverDTO.getDriverPw())
-                .dPhoneNumber(driverDTO.getDPhoneNumber())
+                .driverPhoneNumber(driverDTO.getDriverPhoneNumber())
                 .carNumber(driverDTO.getCarNumber())
                 .build();
 

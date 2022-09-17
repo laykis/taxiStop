@@ -10,7 +10,7 @@ import javax.persistence.Id;
 
 @Entity
 @Getter
-@NoArgsConstructor
+
 public class UserInfo {
 
     @Id
@@ -22,6 +22,10 @@ public class UserInfo {
 
     private String userName;
 
+    public UserInfo(){
+
+
+    }
 
     public void settingToken(String token){
 

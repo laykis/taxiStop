@@ -14,17 +14,19 @@ public class Log {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long lid;
 
-    private String userName;
+    private String token;
 
     private String driverName;
 
-    private String dPhoneNumber;
+    private String driverPhoneNumber;
 
     private String carNumber;
 
     private String endDate;
 
-    private String boardingLocation;
+    private String latitude;
+
+    private String longitude;
 
 
 
@@ -33,16 +35,18 @@ public class Log {
     }
     public static class Builder{
 
-        private String userName;
+        private String token;
         private String driverName;
-        private String dPhoneNumber;
+        private String driverPhoneNumber;
         private String carNumber;
         private String endDate;
-        private String boardingLocation;
+        private String latitude;
+        private String longitude;
 
 
-        public Builder userName(String userName){
-            this.userName = userName;
+
+        public Builder token(String token){
+            this.token = token;
             return this;
         }
 
@@ -51,8 +55,8 @@ public class Log {
             return this;
         }
 
-        public Builder dPhoneNumber(String dPhoneNumber){
-            this.dPhoneNumber = dPhoneNumber;
+        public Builder driverPhoneNumber(String driverPhoneNumber){
+            this.driverPhoneNumber = driverPhoneNumber;
             return this;
         }
 
@@ -66,8 +70,13 @@ public class Log {
             return this;
         }
 
-        public Builder boardingLocation(String boardingLocation){
-            this.boardingLocation = boardingLocation;
+        public Builder latitude(String latitude){
+            this.latitude = latitude;
+            return this;
+        }
+
+        public Builder longitude(String longitude){
+            this.longitude = longitude;
             return this;
         }
 
@@ -78,12 +87,14 @@ public class Log {
     }
 
     public Log(Builder builder){
-        this.userName = builder.userName;
+        this.token = builder.token;
         this.driverName = builder.driverName;
-        this.dPhoneNumber = builder.dPhoneNumber;
+        this.driverPhoneNumber = builder.driverPhoneNumber;
         this.carNumber = builder.carNumber;
         this.endDate = builder.endDate;
-        this.boardingLocation = builder.boardingLocation;
+        this.latitude = builder.latitude;
+        this.longitude = builder.longitude;
+
 
     }
 

@@ -4,8 +4,9 @@ import WKU.taxiStop.DTO.DispatchStatusDTO;
 import WKU.taxiStop.DTO.DriverDTO;
 import WKU.taxiStop.StaticStuff;
 import WKU.taxiStop.entity.DriverInfo;
+import WKU.taxiStop.entity.Log;
 import WKU.taxiStop.repository.DriverInfoRepository;
-import WKU.taxiStop.repository.UserInfoRepository;
+import WKU.taxiStop.repository.LogRepository;
 import WKU.taxiStop.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,29 +14,34 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.NoSuchElementException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
-@RestController
-@RequiredArgsConstructor
+
+@RestController @RequiredArgsConstructor
+
 public class AppController {
 
     private final DriverInfoRepository driverInfoRepository;
-    private final UserInfoRepository userInfoRepository;
     private final AuthService authService;
+    private final LogRepository logRepository;
 
 
-    @GetMapping("/DriverLogin")
-    public String login(DriverDTO driverDTO){
 
-        String loginId = driverInfoRepository.findDriverInfoByDriverId(driverDTO.getDriverId()).getDriverId();
-        String loginPw = driverInfoRepository.findDriverInfoByDriverId(driverDTO.getDriverId()).getDriverPw();
+    @PostMapping("/DriverLogin")
+    public String login(String driverId, String driverPw){
+
+        String loginId = driverInfoRepository.findDriverInfoByDriverId(driverId.trim()).getDriverId();
+        String loginPw = driverInfoRepository.findDriverInfoByDriverId(driverId.trim()).getDriverPw();
 
         if( loginId != null){
 
-            if(driverDTO.getDriverPw().trim().equals(loginPw)) return "login sucsess";
+            if(driverPw.trim().equals(loginPw)) return "login sucsess";
 
             return "fail";
         }
@@ -99,9 +105,35 @@ public class AppController {
 
     }
 
+    @PostMapping("/EndService")
+    public void endService(String token){
 
-    @GetMapping("/NearRequest")
-    public List<DispatchStatusDTO> getNearRequest(double latitude, double longitude, double distance){
+
+        DispatchStatusDTO dis = StaticStuff.dispatchStatusDTOList.stream()
+                .filter(dispatchStatusDTO -> dispatchStatusDTO.getToken().equals(token))
+                .findAny()
+                .orElseThrow(NoSuchElementException::new);
+
+
+        LocalDateTime now = LocalDateTime.now();
+        String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분 ss초"));
+
+        Log log = new Log.Builder()
+                .token(token)
+                .carNumber(dis.getCarNumber())
+                .driverPhoneNumber(dis.getDriverPhoneNumber())
+                .latitude(dis.getLatitude())
+                .longitude(dis.getLongitude())
+                .endDate(formatedNow)
+                .build();
+                                        .
+        logRepository.save(log);
+
+    }
+
+
+    @PostMapping("/NearRequest")
+    public List<DispatchStatusDTO> getNearRequest(Double latitude, Double longitude, Double distance){
         return StaticStuff.dispatchStatusDTOList.stream()
                 .filter(dto -> {
                     double x = (Math.cos(latitude) * 6400 * 2 * 3.14 / 360) * Math.abs(longitude - Double.parseDouble(dto.getLongitude()));

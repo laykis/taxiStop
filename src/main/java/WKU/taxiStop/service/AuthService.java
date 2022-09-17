@@ -23,7 +23,7 @@ public class AuthService {
 
         if(driverInfoRepository.findDriverInfoByCarNumber(driverDTO.getCarNumber()) != null) return false;
 
-        if(driverInfoRepository.findDriverInfoByDPhoneNumber(driverDTO.getDPhoneNumber()) != null) return false;
+        if(driverInfoRepository.findDriverInfoByDriverPhoneNumber(driverDTO.getDriverPhoneNumber()) != null) return false;
 
         return true;
     }

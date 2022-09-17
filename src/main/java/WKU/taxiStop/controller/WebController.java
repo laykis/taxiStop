@@ -32,7 +32,7 @@ public class WebController {
                 .findAny()).isPresent()){
             if(!dto.get().getCallStatus().equalsIgnoreCase("0")) {
                 model.addAttribute("driverName", dto.get().getDriverName());
-                model.addAttribute("dPhoneNumber", dto.get().getDPhoneNumber());
+                model.addAttribute("dPhoneNumber", dto.get().getDriverPhoneNumber());
                 model.addAttribute("carNumber", dto.get().getCarNumber());
             }
             return "waiting";
@@ -89,7 +89,7 @@ public class WebController {
             if (!di.getCallStatus().equals("0")) return "fail";
 
             di.setDriverName(dr.getDriverName());
-            di.setDPhoneNumber(dr.getDPhoneNumber());
+            di.setDriverPhoneNumber(dr.getDriverPhoneNumber());
             di.setCarNumber(dr.getCarNumber());
             di.setCallStatus("1");
 

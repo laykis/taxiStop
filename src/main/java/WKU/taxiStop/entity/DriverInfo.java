@@ -7,18 +7,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
-@Getter
+
+@Entity @Getter
 public class DriverInfo {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long did;
+    private Long id;
 
     private String driverName;
 
     private String carNumber;
 
-    private String dPhoneNumber;
+    private String driverPhoneNumber;
 
     private String driverId;
 
@@ -28,13 +28,14 @@ public class DriverInfo {
 
     public DriverInfo(){
 
+
     }
 
     public static class Builder{
 
         private String driverName;
         private String carNumber;
-        private String dPhoneNumber;
+        private String driverPhoneNumber;
         private String driverId;
         private String driverPw;
 
@@ -48,8 +49,8 @@ public class DriverInfo {
             return this;
         }
 
-        public Builder dPhoneNumber(String dPhoneNumber){
-            this.dPhoneNumber = dPhoneNumber;
+        public Builder driverPhoneNumber(String driverPhoneNumber){
+            this.driverPhoneNumber = driverPhoneNumber;
             return this;
         }
 
@@ -71,7 +72,7 @@ public class DriverInfo {
     public DriverInfo(Builder builder){
         this.driverName = builder.driverName;
         this.carNumber = builder.carNumber;
-        this.dPhoneNumber = builder.dPhoneNumber;
+        this.driverPhoneNumber = builder.driverPhoneNumber;
         this.driverId = builder.driverId;
         this.driverPw = builder.driverPw;
     }

@@ -14,7 +14,7 @@ public class DispatchStatusDTO {
     private String longitude;
     private String driverName;
     private String carNumber;
-    private String dPhoneNumber;
+    private String driverPhoneNumber;
     private String callStatus;
 
 }
