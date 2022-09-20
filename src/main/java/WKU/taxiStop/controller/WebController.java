@@ -4,6 +4,7 @@ import WKU.taxiStop.DTO.DispatchStatusDTO;
 import WKU.taxiStop.StaticStuff;
 import WKU.taxiStop.entity.DriverInfo;
 import WKU.taxiStop.repository.DriverInfoRepository;
+import WKU.taxiStop.repository.UserInfoRepository;
 import WKU.taxiStop.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,11 +21,11 @@ import java.util.Optional;
 public class WebController {
 
     private final AuthService authService;
+    private final UserInfoRepository userInfoRepository;
     private final DriverInfoRepository driverInfoRepository;
 
     @GetMapping("/")
     public String main(@RequestParam String token, Model model){
-
 
         Optional<DispatchStatusDTO> dto = null;
         if((dto = StaticStuff.dispatchStatusDTOList.stream()

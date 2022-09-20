@@ -49,7 +49,7 @@ public class AppController {
 
         if( loginId != null){
 
-            if(driverPw.trim().equals(loginPw)) return "login sucsess";
+            if(driverPw.trim().equals(loginPw)) return "login success";
 
             return "fail";
         }
@@ -93,6 +93,7 @@ public class AppController {
                 .findAny()
                 .orElseThrow(NoSuchElementException::new);
 
+        System.out.println(dis.getCallStatus());
         if(dis.getCallStatus().trim().equals("0")){
 
             dis.setCallStatus("1");
@@ -113,7 +114,7 @@ public class AppController {
 
     @PostMapping("/BoardingComplete")
     public void boarding(String token, String driverId){
-
+        System.out.println(token);
         DispatchStatusDTO dis = StaticStuff.dispatchStatusDTOList.stream()
                 .filter(dispatchStatusDTO -> dispatchStatusDTO.getToken().equals(token))
                 .findAny()
@@ -139,6 +140,7 @@ public class AppController {
         Log log = new Log.Builder()
                 .token(token)
                 .carNumber(dis.getCarNumber())
+                .driverName(dis.getDriverName())
                 .driverPhoneNumber(dis.getDriverPhoneNumber())
                 .latitude(dis.getLatitude())
                 .longitude(dis.getLongitude())
@@ -146,6 +148,8 @@ public class AppController {
                 .build();
 
         logRepository.save(log);
+
+        StaticStuff.dispatchStatusDTOList.remove(dis);
 
     }
 
@@ -156,7 +160,9 @@ public class AppController {
                     double x = (Math.cos(latitude) * 6400 * 2 * 3.14 / 360) * Math.abs(longitude - Double.parseDouble(dto.getLongitude()));
                     double y = 111 * Math.abs(latitude - Double.parseDouble(dto.getLatitude()));
                     return Math.sqrt(Math.pow(x, 2) + Math.pow(y,2)) < distance;
-                }).collect(Collectors.toList());
+                }).filter(dto -> dto.getCallStatus().equals("0"))
+                .collect(Collectors.toList());
     }
+
 
 }
