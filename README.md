@@ -33,11 +33,11 @@
 ---
 ### **2.서비스 설계**
 
-*Back-End :* Spring boot, JPA, MySQL
+*Back-End :* Spring boot, JPA, MySQL  
 *Front-End :* Android Studio
 
 <img width="653" alt="image" src="https://user-images.githubusercontent.com/73100987/193766983-b99fdde5-ae31-46ad-9210-ff3dd81ddf8d.png">
----
+--- 
 
 ### **3.서비스 기능**
 
